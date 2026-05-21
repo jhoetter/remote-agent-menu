@@ -10,6 +10,7 @@ set -euo pipefail
 REPO="$HOME/code/bim-ai"
 CLAUDE_CMD="claude --dangerously-skip-permissions"
 CODEX_CMD="codex --dangerously-bypass-approvals-and-sandbox"
+TERMINAL_PROGRAM_FOR_TUIS="kitty"
 
 # Aktuelles Arbeitsverzeichnis des Menüs. Neue Sessions starten hier.
 if [ -d "$REPO" ]; then
@@ -132,8 +133,9 @@ start_agent() {
     return
   fi
 
+  tmux set-environment -g TERM_PROGRAM "$TERMINAL_PROGRAM_FOR_TUIS"
   tmux new-session -d -s "$name" -c "$CWD"
-  tmux send-keys -t "$name" "$cmd" C-m
+  tmux send-keys -t "$name" "TERM_PROGRAM=$TERMINAL_PROGRAM_FOR_TUIS $cmd" C-m
 
   echo "Started session: $name  (cwd: $(pretty_path "$CWD"))"
   attach_or_switch "$name"
