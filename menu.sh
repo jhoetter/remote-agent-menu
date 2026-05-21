@@ -99,6 +99,18 @@ draw_header() {
 #  Session-Aktionen
 # ============================================================
 
+# Attached an eine tmux-Session. Wenn das Menü selbst schon in tmux läuft,
+# wird per switch-client gewechselt (attach würde sonst mit "sessions should
+# be nested with care" fehlschlagen).
+attach_or_switch() {
+  local target="$1"
+  if [ -n "${TMUX:-}" ]; then
+    tmux switch-client -t "$target"
+  else
+    tmux attach -t "$target"
+  fi
+}
+
 start_agent() {
   local type="$1"
   local cmd="$2"
@@ -116,7 +128,7 @@ start_agent() {
 
   if tmux has-session -t "$name" 2>/dev/null; then
     echo "Session exists -> attaching: $name"
-    tmux attach -t "$name"
+    attach_or_switch "$name"
     return
   fi
 
@@ -124,7 +136,7 @@ start_agent() {
   tmux send-keys -t "$name" "$cmd" C-m
 
   echo "Started session: $name  (cwd: $(pretty_path "$CWD"))"
-  tmux attach -t "$name"
+  attach_or_switch "$name"
 }
 
 # Wählt EINE Session per fzf (oder Fallback). Setzt SELECTED_NAME.
@@ -227,7 +239,7 @@ pick_multiple_sessions() {
 
 attach_session() {
   pick_one_session || return
-  tmux attach -t "$SELECTED_NAME"
+  attach_or_switch "$SELECTED_NAME"
 }
 
 kill_one_session() {
