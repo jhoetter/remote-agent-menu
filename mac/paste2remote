@@ -1,0 +1,3 @@
+#!/bin/bash
+# Paste Mac clipboard into the active tmux pane on ubuntu-dev.
+pbpaste | ssh ubuntu-dev 'tmux load-buffer - && tmux paste-buffer'

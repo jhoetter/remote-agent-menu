@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+REMOTE="ubuntu-dev"
+REMOTE_DIR="/home/jhoetter/shots"
+NAME="shot-$(date +%Y%m%d-%H%M%S).png"
+TMP="$(mktemp -t shot).png"
+
+/usr/sbin/screencapture -i "$TMP"
+
+[ -s "$TMP" ] || { rm -f "$TMP"; exit 0; }
+
+ssh "$REMOTE" "mkdir -p $REMOTE_DIR"
+scp -q "$TMP" "$REMOTE:$REMOTE_DIR/$NAME"
+rm -f "$TMP"
+printf '%s' "$REMOTE_DIR/$NAME" | pbcopy
+osascript -e "display notification \"$REMOTE_DIR/$NAME\" with title \"Uploaded to Ubuntu\""

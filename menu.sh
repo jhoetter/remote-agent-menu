@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+
 # ============================================================
 #  AI AGENT MENU
 #  - fzf-based UI (live filter + arrow nav + preview), with a

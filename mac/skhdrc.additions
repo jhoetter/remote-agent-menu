@@ -1,0 +1,9 @@
+# Add these lines to ~/.skhdrc on your Mac.
+# Requires skhd: brew install koekeishiya/formulae/skhd
+#
+# ⌃⌘S  — capture a screen region, upload to ubuntu-dev:/home/jhoetter/shots/,
+#          put the remote path in the Mac clipboard.
+ctrl + cmd - s : /Users/jhoetter/bin/shot2remote-capture
+
+# ⌃⌘V  — paste the Mac clipboard into the active tmux pane on ubuntu-dev.
+ctrl + cmd - v : /Users/jhoetter/bin/paste2remote

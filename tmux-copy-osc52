@@ -1,0 +1,6 @@
+#!/bin/bash
+# Pipe tmux mouse-selection to Mac clipboard via OSC 52.
+# Install: sudo cp tmux-copy-osc52 /usr/local/bin/ && sudo chmod +x /usr/local/bin/tmux-copy-osc52
+buf=$(cat)
+printf '%s' "$buf" >> ~/.tmux-last-copy
+printf '\033]52;c;%s\007' "$(printf '%s' "$buf" | base64 | tr -d '\n')" > /dev/tty
