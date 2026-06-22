@@ -1,13 +1,13 @@
 # remote-agent-menu
 
-A fancy `fzf`-powered tmux launcher for AI coding agents (Claude Code, Codex).
+A fancy `fzf`-powered tmux launcher for AI coding agents (Claude Code, Codex, OpenCode).
 Built to be used over SSH/tmux/Tailscale on a remote machine.
 
 ## Features
 
 - Live-filter menu (type to filter, arrow keys, enter) — falls back to a
   plain numbered menu if `fzf` is not installed
-- Start Claude / Codex sessions in tmux, each in your chosen working directory
+- Start Claude / Codex / OpenCode sessions in tmux, each in your chosen working directory
 - Attach to or kill sessions, with a live preview of each session's pane
 - Built-in `cd` and a mini-shell (run `git pull`, `ls`, etc. before launching)
 - Header showing current dir, git branch, and number of running sessions
@@ -16,7 +16,7 @@ Built to be used over SSH/tmux/Tailscale on a remote machine.
 
 - `bash`, `tmux`, `git`
 - `fzf` (optional but recommended — without it you get a plain numbered menu)
-- `claude` and/or `codex` CLIs on your `PATH`
+- `claude`, `codex`, and/or `opencode` CLIs on your `PATH`
 
 On Ubuntu/Debian:
 
@@ -56,7 +56,7 @@ launch-agent-menu
 Edit the variables at the top of `menu.sh`:
 
 - `REPO` — default working directory the menu starts in
-- `CLAUDE_CMD` / `CODEX_CMD` — the commands launched for each agent type
+- `CLAUDE_CMD` / `CODEX_CMD` / `OPENCODE_CMD` — the commands launched for each agent type
 
 ---
 
