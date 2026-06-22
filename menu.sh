@@ -12,7 +12,7 @@ export PATH="$HOME/.opencode/bin:$HOME/.local/bin:$HOME/bin:$PATH"
 REPO="$HOME/code/bim-ai"
 CLAUDE_CMD="claude --dangerously-skip-permissions"
 CODEX_CMD="codex --dangerously-bypass-approvals-and-sandbox"
-OPENCODE_CMD="opencode"
+OPENCODE_CMD="OPENCODE_CONFIG_CONTENT='{\"permission\":\"allow\"}' opencode"
 TERMINAL_PROGRAM_FOR_TUIS="kitty"
 
 # Aktuelles Arbeitsverzeichnis des Menüs. Neue Sessions starten hier.
@@ -88,7 +88,7 @@ draw_header() {
   echo
   echo "${C_ORANGE}  ╭───────────────────────────────────────────────────────╮${C_RESET}"
   echo "${C_ORANGE}  │${C_RESET}   ${C_BOLD}${C_CYAN}▐▛███▜▌${C_RESET}    ${C_BOLD}A I   A G E N T   M E N U${C_RESET}                ${C_ORANGE}│${C_RESET}"
-  echo "${C_ORANGE}  │${C_RESET}  ${C_BOLD}${C_CYAN}▝▜█████▛▘${C_RESET}   ${C_DIM}claude · codex · opencode · tmux${C_RESET}         ${C_ORANGE}│${C_RESET}"
+  echo "${C_ORANGE}  │${C_RESET}  ${C_BOLD}${C_CYAN}▝▜█████▛▘${C_RESET}   ${C_DIM}opencode · claude · codex · tmux${C_RESET}         ${C_ORANGE}│${C_RESET}"
   echo "${C_ORANGE}  │${C_RESET}    ${C_BOLD}${C_CYAN}▘▘ ▝▝${C_RESET}                                              ${C_ORANGE}│${C_RESET}"
   echo "${C_ORANGE}  ╰───────────────────────────────────────────────────────╯${C_RESET}"
   printf "   ${C_GREY}cwd${C_RESET} ${C_GREEN}%s${C_RESET}" "$cwd_disp"
@@ -357,9 +357,9 @@ run_shell() {
 # ============================================================
 
 MENU_ITEMS=(
+  "▶  New OpenCode session	opencode"
   "▶  New Claude session	claude"
   "▶  New Codex session	codex"
-  "▶  New OpenCode session	opencode"
   "⚲  Attach session	attach"
   "✕  Kill one session	kill1"
   "✕✕ Kill multiple sessions	killN"

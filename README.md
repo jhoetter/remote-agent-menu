@@ -58,6 +58,9 @@ Edit the variables at the top of `menu.sh`:
 - `REPO` — default working directory the menu starts in
 - `CLAUDE_CMD` / `CODEX_CMD` / `OPENCODE_CMD` — the commands launched for each agent type
 
+By default OpenCode is launched with `OPENCODE_CONFIG_CONTENT='{"permission":"allow"}'`,
+which is its equivalent of running the session without approval prompts.
+
 ---
 
 ## Mac setup (full remote dev workflow)
