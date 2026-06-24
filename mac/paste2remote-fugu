@@ -1,0 +1,4 @@
+#!/bin/bash
+# Paste Mac clipboard into the active tmux pane on the Fugu host.
+REMOTE="${SONALOOP_FUGU_SSH_HOST:-sonaloop-fugu-us}"
+pbpaste | ssh "$REMOTE" 'tmux load-buffer - && tmux paste-buffer'

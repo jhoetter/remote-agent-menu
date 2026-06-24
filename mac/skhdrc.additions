@@ -7,3 +7,9 @@ ctrl + cmd - s : /Users/jhoetter/bin/shot2remote-capture
 
 # ⌃⌘V  — paste the Mac clipboard into the active tmux pane on ubuntu-dev.
 ctrl + cmd - v : /Users/jhoetter/bin/paste2remote
+
+# ⌃⇧⌘S — capture a screen region, upload to Fugu, copy the remote path.
+ctrl + shift + cmd - s : /Users/jhoetter/bin/shot2remote-capture-fugu
+
+# ⌃⇧⌘V — paste the Mac clipboard into the active tmux pane on Fugu.
+ctrl + shift + cmd - v : /Users/jhoetter/bin/paste2remote-fugu
