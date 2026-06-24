@@ -12,6 +12,8 @@ export PATH="$HOME/.opencode/bin:$HOME/.local/bin:$HOME/bin:$PATH"
 REPO="$HOME/code/bim-ai"
 CLAUDE_CMD="claude --dangerously-skip-permissions"
 CODEX_CMD="codex --dangerously-bypass-approvals-and-sandbox"
+CODEX_FUGU_CMD="codex-fugu --dangerously-bypass-approvals-and-sandbox"
+CODEX_FUGU_ULTRA_CMD="codex-fugu -m fugu-ultra --dangerously-bypass-approvals-and-sandbox"
 OPENCODE_CMD="OPENCODE_CONFIG_CONTENT='{\"permission\":\"allow\"}' opencode"
 TERMINAL_PROGRAM_FOR_TUIS="kitty"
 
@@ -88,7 +90,7 @@ draw_header() {
   echo
   echo "${C_ORANGE}  ╭───────────────────────────────────────────────────────╮${C_RESET}"
   echo "${C_ORANGE}  │${C_RESET}   ${C_BOLD}${C_CYAN}▐▛███▜▌${C_RESET}    ${C_BOLD}A I   A G E N T   M E N U${C_RESET}                ${C_ORANGE}│${C_RESET}"
-  echo "${C_ORANGE}  │${C_RESET}  ${C_BOLD}${C_CYAN}▝▜█████▛▘${C_RESET}   ${C_DIM}opencode · claude · codex · tmux${C_RESET}         ${C_ORANGE}│${C_RESET}"
+  echo "${C_ORANGE}  │${C_RESET}  ${C_BOLD}${C_CYAN}▝▜█████▛▘${C_RESET}   ${C_DIM}opencode · claude · codex/fugu · tmux${C_RESET}    ${C_ORANGE}│${C_RESET}"
   echo "${C_ORANGE}  │${C_RESET}    ${C_BOLD}${C_CYAN}▘▘ ▝▝${C_RESET}                                              ${C_ORANGE}│${C_RESET}"
   echo "${C_ORANGE}  ╰───────────────────────────────────────────────────────╯${C_RESET}"
   printf "   ${C_GREY}cwd${C_RESET} ${C_GREEN}%s${C_RESET}" "$cwd_disp"
@@ -360,6 +362,8 @@ MENU_ITEMS=(
   "▶  New OpenCode session	opencode"
   "▶  New Claude session	claude"
   "▶  New Codex session	codex"
+  "▶  New Codex Fugu session	codex-fugu"
+  "▶  New Codex Fugu Ultra session	codex-fugu-ultra"
   "⚲  Attach session	attach"
   "✕  Kill one session	kill1"
   "✕✕ Kill multiple sessions	killN"
@@ -410,6 +414,8 @@ while true; do
   case "$action" in
     claude)   start_agent "claude" "$CLAUDE_CMD" || true ;;
     codex)    start_agent "codex" "$CODEX_CMD" || true ;;
+    codex-fugu) start_agent "codex-fugu" "$CODEX_FUGU_CMD" || true ;;
+    codex-fugu-ultra) start_agent "codex-fugu-ultra" "$CODEX_FUGU_ULTRA_CMD" || true ;;
     opencode) start_agent "opencode" "$OPENCODE_CMD" || true ;;
     attach)   attach_session || true ;;
     kill1)    kill_one_session || true; read -rp "Press enter..." ;;

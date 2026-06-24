@@ -1,0 +1,3 @@
+#!/bin/bash
+REMOTE="${SONALOOP_FUGU_SSH_HOST:-sonaloop-fugu-us}"
+exec ssh -tt "$REMOTE" 'agent-menu'

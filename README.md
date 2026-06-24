@@ -1,13 +1,13 @@
 # remote-agent-menu
 
-A fancy `fzf`-powered tmux launcher for AI coding agents (Claude Code, Codex, OpenCode).
+A fancy `fzf`-powered tmux launcher for AI coding agents (Claude Code, Codex, Codex Fugu, OpenCode).
 Built to be used over SSH/tmux/Tailscale on a remote machine.
 
 ## Features
 
 - Live-filter menu (type to filter, arrow keys, enter) — falls back to a
   plain numbered menu if `fzf` is not installed
-- Start Claude / Codex / OpenCode sessions in tmux, each in your chosen working directory
+- Start Claude / Codex / Codex Fugu / OpenCode sessions in tmux, each in your chosen working directory
 - Attach to or kill sessions, with a live preview of each session's pane
 - Built-in `cd` and a mini-shell (run `git pull`, `ls`, etc. before launching)
 - Header showing current dir, git branch, and number of running sessions
@@ -16,7 +16,7 @@ Built to be used over SSH/tmux/Tailscale on a remote machine.
 
 - `bash`, `tmux`, `git`
 - `fzf` (optional but recommended — without it you get a plain numbered menu)
-- `claude`, `codex`, and/or `opencode` CLIs on your `PATH`
+- `claude`, `codex`, `codex-fugu`, and/or `opencode` CLIs on your `PATH`
 
 On Ubuntu/Debian:
 
@@ -56,7 +56,7 @@ launch-agent-menu
 Edit the variables at the top of `menu.sh`:
 
 - `REPO` — default working directory the menu starts in
-- `CLAUDE_CMD` / `CODEX_CMD` / `OPENCODE_CMD` — the commands launched for each agent type
+- `CLAUDE_CMD` / `CODEX_CMD` / `CODEX_FUGU_CMD` / `CODEX_FUGU_ULTRA_CMD` / `OPENCODE_CMD` — the commands launched for each agent type
 
 By default OpenCode is launched with `OPENCODE_CONFIG_CONTENT='{"permission":"allow"}'`,
 which is its equivalent of running the session without approval prompts.
@@ -100,12 +100,12 @@ This setup gives you:
 ### Install Mac scripts
 
 ```bash
-# Copy the three scripts into ~/bin (or any directory on your PATH)
-cp mac/shot2remote-capture mac/paste2remote mac/launch-agent-menu ~/bin/
-chmod +x ~/bin/shot2remote-capture ~/bin/paste2remote ~/bin/launch-agent-menu
+# Copy the scripts into ~/bin (or any directory on your PATH)
+cp mac/shot2remote-capture mac/paste2remote mac/launch-agent-menu mac/launch-agent-menu-fugu ~/bin/
+chmod +x ~/bin/shot2remote-capture ~/bin/paste2remote ~/bin/launch-agent-menu ~/bin/launch-agent-menu-fugu
 ```
 
-Edit `~/bin/shot2remote-capture` and `~/bin/paste2remote` if your remote host alias or username differ from `ubuntu-dev` / `jhoetter`.
+Edit `~/bin/shot2remote-capture` and `~/bin/paste2remote` if your remote host alias or username differ from `ubuntu-dev` / `jhoetter`. `launch-agent-menu-fugu` uses the SSH host alias `sonaloop-fugu-us` unless `SONALOOP_FUGU_SSH_HOST` is set.
 
 ### Configure skhd
 
